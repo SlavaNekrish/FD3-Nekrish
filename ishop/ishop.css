@@ -1,0 +1,71 @@
+.container
+{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.GoodsBlock
+{
+  display: flex;
+  flex-direction: column;
+  background-color: blanchedalmond;
+
+}
+
+.GoodsBlock .headLine
+{
+  margin: 0 auto;
+  font: bold 40px Times;
+  margin-bottom: 20px;
+}
+
+
+.GoodsBlock .goods
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  
+}
+
+.GoodsBlock .GoodCard
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 2px;
+  background-color: white;
+  justify-content: center;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  width: 380px;
+}
+
+.GoodsBlock .GoodCard .goodName
+{
+  font: bold 25px Times;
+  margin: 10px;
+
+}
+
+.GoodsBlock .GoodCard .price
+{
+  font: bold 20px Times;
+}
+
+.GoodsBlock .GoodCard .quantity 
+{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font: bold 15px Times;
+}
+
+.GoodsBlock .picture
+{
+  width: 350px;
+  height: 350px;
+  margin-bottom: 10px;
+}
+

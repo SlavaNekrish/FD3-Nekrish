@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>ishop</title>
+</head> 
+<body> 
+  <div id="container"></div> 
+      
+  <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+      
+  <script src="ishop.js"></script>
+  <link rel="stylesheet" type="text/css" href="ishop.css" />
+
+  <script>
+
+    var headerText='Товары нашего магазина';
+    var goodsArr=[ 
+      {name:'Осьминожек',code:1, price:"30 BYN", url: "img/item_1.jpg", count:`Осталось ${165} шт.`}, 
+      {name:'Пони-лукони',code:2, price:"15 BYN", url: "img/item_2.jpg", count:`Осталось ${23} шт.`}, 
+      {name:'Хаги-ваги',code:3, price:"10 BYN", url: "img/item_3.jpg", count:`Осталось ${86} шт.`},
+      {name:'Чебурашка',code:4, price:"50 BYN", url: "img/item_4.jpg", count:`Осталось ${11} шт.`},
+      {name:'Котенок',code:5, price:"75 BYN", url: "img/item_5.jpg", count:`Осталось ${102} шт.`},
+      {name:'Мишка',code:6, price:"9 BYN", url: "img/item_6.jpg", count:`Осталось ${9} шт.`},
+      {name:'Пикачу',code:7, price:"65 BYN", url: "img/item_7.jpg", count:`Осталось ${92} шт.`},
+      {name:'Синяш',code:8, price:"40 BYN", url: "img/item_8.jpg", count:`Осталось ${10} шт.`},
+      {name:'Тигра',code:9, price:"20 BYN", url: "img/item_9.jpg", count:`Осталось ${41} шт.`},
+      {name:'Обезьянка ЧиЧиЧи',code:10, price:"35 BYN", url: "img/item_10.jpg", count:`Осталось ${2} шт.`},
+    ];
+
+    ReactDOM.render(
+      React.createElement(GoodsBlock,{headLine:headerText,goods:goodsArr}), 
+      document.getElementById('container') 
+    );
+
+  </script>
+
+</body> 
+</html>
