@@ -1,5 +1,6 @@
 var FilterBlock = React.createClass({
 
+
   displayName: 'FilterBlock',
 
   propTypes: {
@@ -14,19 +15,21 @@ var FilterBlock = React.createClass({
   getInitialState: function() {
     return { 
       words:this.props.deffwords,
+      previousWords: null,
       isCheckboxChecked: false,
+      defaultInputValue: "",
     };
   },
 
   sortThisArr: function() {
-    var wordsArrSorted = JSON.parse(JSON.stringify(wordsArr));
-    wordsArrSorted.sort((prev, next) => {
+    var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
+    var sortedWordsArr = this.state.words.sort((prev, next) => {
       if (prev.text < next.text)
       return -1;
       else if (prev.text > next.text)
       return 1;
     })
-    this.setState( {words: wordsArrSorted} );
+    this.setState( {words: sortedWordsArr, previousWords: currentWordsArr} );
   },
 
   checkboxSelected: function(info) {
@@ -35,21 +38,37 @@ var FilterBlock = React.createClass({
       this.sortThisArr()
     }
     else {
-      this.setState( {words:this.props.deffwords} );
+      this.setState( {words:this.state.previousWords} );
     }
     this.setState( {isCheckboxChecked: info} );
   },
   
+  filterThisArr: function(val, list) {
+    if (val === "") {
+      this.setState( {words:this.state.previousWords} );
+      console.log(this.state.words)
+    }
+    var filteredArray = list.filter(i=>(~i.text.indexOf(val)))
+    this.setState( {words: filteredArray, previousWords: list} );
+  },
+
+  inputTextChanged: function(fat) { 
+    console.log('VotesBlock: текст инпута изменён - '+fat); 
+    this.setState( {defaultInputValue: fat} );
+    this.filterThisArr(fat, this.state.words)
+  },
+
   clearInputs: function() {
-    if (this.state.isCheckboxChecked) {
+    if (this.state.isCheckboxChecked || this.state.defaultInputValue) {
       this.setState( {
         words:this.props.deffwords,
         isCheckboxChecked: false,
+        defaultInputValue: "",
        })
-       console.log('FilterBlock checkbox checked- false'); 
+       console.log('FilterBlock checkbox checked- false, input cleared'); 
     }
   },
-  
+
   render: function() {
 
     var wordsCode=this.state.words.map( v =>
@@ -59,8 +78,9 @@ var FilterBlock = React.createClass({
 
     return React.DOM.div( {className:'FilterBlock'}, 
       React.createElement(SortBox, {cbSelected:this.checkboxSelected, selectedState:this.state.isCheckboxChecked}),
-      React.DOM.input( {type:'text', onChange:this.filterList, defaultValue:this.state.defaultInputValue,} ),
+      React.createElement(FilterInput, {cbInputTextChanged:this.inputTextChanged, defaultInputFilterValue:this.state.defaultInputValue}),
       React.DOM.input( {type:'button', value:"сброс", onClick:this.clearInputs} ),
+      React.DOM.br(null),
       React.DOM.select( {size:'6'}, wordsCode ),
     );
 
