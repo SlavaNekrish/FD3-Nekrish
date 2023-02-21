@@ -24,13 +24,14 @@ var FilterBlock = React.createClass({
   sortThisArr: function() {
     var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
     var previousWordsArr = JSON.parse(JSON.stringify(this.state.words)); 
-    var sortedWordsArr = currentWordsArr.sort((prev, next) => {
+    currentWordsArr.sort((prev, next) => {
       if (prev.text < next.text)
       return -1;
       else if (prev.text > next.text)
       return 1;
     })
-    this.setState( {words: sortedWordsArr, previousWords: previousWordsArr} );
+    this.setState( {words: currentWordsArr, previousWords: previousWordsArr} );
+
   },
 
   checkboxSelected: function(info) {
@@ -40,6 +41,7 @@ var FilterBlock = React.createClass({
     }
     else {
       this.setState( {words:this.state.previousWords} );
+      console.log(this.state.previousWords)
     }
     this.setState( {isCheckboxChecked: info} );
   },
@@ -48,13 +50,14 @@ var FilterBlock = React.createClass({
 
   filterThisArr: function(val, list) {
     var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
+    
     if (val === "") {
       this.setState( {words: currentWordsArr} );
-      console.log(this.state.words)
     }
     var filteredArray = list.filter(i=>(~i.text.indexOf(val)))
     
-    this.setState( {words: filteredArray} );
+    this.setState( {words: filteredArray, previousWords: currentWordsArr} );
+    console.log(this.state.previousWords)
   },
 
   inputTextChanged: function(fat) { 
