@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>filter</title>
+</head>
+<body>
+  <div id="container"></div> 
+      
+  <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+      
+  <script src="FilterBlock.js"></script>
+  <script src="SortBox.js"></script>
+  <!-- <script src="VotesQuestion.js"></script>
+  <script src="VotesAnswer.js"></script> -->
+
+
+  <script>
+
+    
+    // выделить в отдельные компоненты чек-бокс, инпут, селект 
+    // сделать дефаулт пропс в виде массива, в стейте задать начальное значение равное этому дефаулт пропс. 
+    // в стейт добавить положение чек-бокса ненажатое и пустую строку инпута по умолчанию. ?? - подумать
+
+    var wordsArr=[
+      {text:'california',code:1}, 
+      {text:'everything',code:2},   
+      {text:'aboveboard',code:3},
+      {text:'washington',code:4}, 
+      {text:'basketball',code:5},
+      {text:'weathering',code:6}, 
+      {text:'characters',code:7}, 
+      {text:'literature',code:8}, 
+      {text:'contraband',code:9}, 
+      {text:'appreciate',code:10},
+    ];
+
+    ReactDOM.render(
+      React.createElement(FilterBlock,{deffwords:wordsArr}), 
+      document.getElementById('container') 
+    );
+
+  </script>
+</body>
+</html>
