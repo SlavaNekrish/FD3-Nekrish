@@ -23,13 +23,14 @@ var FilterBlock = React.createClass({
 
   sortThisArr: function() {
     var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
-    var sortedWordsArr = this.state.words.sort((prev, next) => {
+    var previousWordsArr = JSON.parse(JSON.stringify(this.state.words)); 
+    var sortedWordsArr = currentWordsArr.sort((prev, next) => {
       if (prev.text < next.text)
       return -1;
       else if (prev.text > next.text)
       return 1;
     })
-    this.setState( {words: sortedWordsArr, previousWords: currentWordsArr} );
+    this.setState( {words: sortedWordsArr, previousWords: previousWordsArr} );
   },
 
   checkboxSelected: function(info) {
@@ -43,13 +44,17 @@ var FilterBlock = React.createClass({
     this.setState( {isCheckboxChecked: info} );
   },
   
+// Функция фильтрации работает некорректно. Возможно не те стейты меняю при сортировке и фильтрации
+
   filterThisArr: function(val, list) {
+    var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
     if (val === "") {
-      this.setState( {words:this.state.previousWords} );
+      this.setState( {words: currentWordsArr} );
       console.log(this.state.words)
     }
     var filteredArray = list.filter(i=>(~i.text.indexOf(val)))
-    this.setState( {words: filteredArray, previousWords: list} );
+    
+    this.setState( {words: filteredArray} );
   },
 
   inputTextChanged: function(fat) { 
@@ -65,6 +70,7 @@ var FilterBlock = React.createClass({
         isCheckboxChecked: false,
         defaultInputValue: "",
        })
+       console.log(this.props.deffwords)
        console.log('FilterBlock checkbox checked- false, input cleared'); 
     }
   },
