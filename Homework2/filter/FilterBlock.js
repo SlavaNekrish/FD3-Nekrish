@@ -1,6 +1,5 @@
 var FilterBlock = React.createClass({
 
-
   displayName: 'FilterBlock',
 
   propTypes: {
@@ -17,64 +16,53 @@ var FilterBlock = React.createClass({
       words:this.props.deffwords,
       previousWords: null,
       isCheckboxChecked: false,
-      defaultInputValue: "",
+      InputValue: "",
     };
   },
 
-  sortThisArr: function() {
-    var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
-    var previousWordsArr = JSON.parse(JSON.stringify(this.state.words)); 
+  // функции сортировки списка
+
+  sortThisArr: function(sortList) {
+    var currentWordsArr = sortList.slice();
     currentWordsArr.sort((prev, next) => {
       if (prev.text < next.text)
       return -1;
       else if (prev.text > next.text)
       return 1;
     })
-    this.setState( {words: currentWordsArr, previousWords: previousWordsArr} );
-
+    this.setState( {words: currentWordsArr, previousWords: sortList} );
   },
 
-  checkboxSelected: function(info) {
-    console.log('Filter блок о чекбоксе: '+info);
-    if (info) {
-      this.sortThisArr()
+  checkboxSelected: function(EO) {
+    if (EO.target.checked) {
+      this.setState( {isCheckboxChecked: true} );
+      this.sortThisArr(this.state.words);
     }
     else {
-      this.setState( {words:this.state.previousWords} );
-      console.log(this.state.previousWords)
+      this.setState( {isCheckboxChecked: false, words:this.state.previousWords} );
     }
-    this.setState( {isCheckboxChecked: info} );
   },
-  
-// Функция фильтрации работает некорректно. Возможно не те стейты меняю при сортировке и фильтрации
+
+    // функции фильтрации списка
 
   filterThisArr: function(val, list) {
-    var currentWordsArr = JSON.parse(JSON.stringify(this.state.words));
-    
-    if (val === "") {
-      this.setState( {words: currentWordsArr} );
-    }
+    var currentWordsArr = list.slice();
     var filteredArray = list.filter(i=>(~i.text.indexOf(val)))
-    
     this.setState( {words: filteredArray, previousWords: currentWordsArr} );
-    console.log(this.state.previousWords)
   },
 
-  inputTextChanged: function(fat) { 
-    console.log('VotesBlock: текст инпута изменён - '+fat); 
-    this.setState( {defaultInputValue: fat} );
-    this.filterThisArr(fat, this.state.words)
+  InputTextChanged: function(EO) { 
+    this.setState( {InputValue: EO.target.value} );
+    this.filterThisArr(EO.target.value, this.props.deffwords)
   },
 
   clearInputs: function() {
-    if (this.state.isCheckboxChecked || this.state.defaultInputValue) {
+    if (this.state.isCheckboxChecked || this.state.InputValue) {
       this.setState( {
         words:this.props.deffwords,
         isCheckboxChecked: false,
-        defaultInputValue: "",
+        InputValue: "",
        })
-       console.log(this.props.deffwords)
-       console.log('FilterBlock checkbox checked- false, input cleared'); 
     }
   },
 
@@ -84,15 +72,12 @@ var FilterBlock = React.createClass({
       React.DOM.option({key:v.code,className:'wordOption'}, v.text)
     );
 
-
     return React.DOM.div( {className:'FilterBlock'}, 
-      React.createElement(SortBox, {cbSelected:this.checkboxSelected, selectedState:this.state.isCheckboxChecked}),
-      React.createElement(FilterInput, {cbInputTextChanged:this.inputTextChanged, defaultInputFilterValue:this.state.defaultInputValue}),
+      React.DOM.input( {type:'checkbox', className:'Sortbox', onChange:this.checkboxSelected, checked: this.state.isCheckboxChecked}),
+      React.DOM.input( {type:'text', className:'FilterInput', onChange:this.InputTextChanged, value: this.state.InputValue}),
       React.DOM.input( {type:'button', value:"сброс", onClick:this.clearInputs} ),
       React.DOM.br(null),
       React.DOM.select( {size:'6'}, wordsCode ),
     );
-
   },
-
 });
