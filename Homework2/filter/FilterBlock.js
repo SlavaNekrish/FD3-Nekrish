@@ -31,15 +31,24 @@ var FilterBlock = React.createClass({
       return 1;
     })
     this.setState( {words: currentWordsArr, previousWords: sortList} );
+    console.log("sortThisArr finished")
   },
 
   checkboxSelected: function(EO) {
     if (EO.target.checked) {
       this.setState( {isCheckboxChecked: true} );
       this.sortThisArr(this.state.words);
+      
     }
     else {
       this.setState( {isCheckboxChecked: false, words:this.state.previousWords} );
+    }
+  },
+
+  sortagain: function() {
+    if (this.state.isCheckboxChecked) {
+      console.log("sorted again")
+      this.sortThisArr(this.state.words);
     }
   },
 
@@ -48,7 +57,7 @@ var FilterBlock = React.createClass({
   filterThisArr: function(val, list) {
     var currentWordsArr = list.slice();
     var filteredArray = list.filter(i=>(~i.text.indexOf(val)))
-    this.setState( {words: filteredArray, previousWords: currentWordsArr} );
+    this.setState( {words: filteredArray, previousWords: currentWordsArr}, this.sortagain() );
   },
 
   InputTextChanged: function(EO) { 
