@@ -17,7 +17,12 @@ var GoodsBlock = React.createClass({
   getInitialState: function() {
     return { 
       goodsList: this.props.goods,
+      selectedGood: null,
     };
+  },
+
+  GoodSelected: function(code) {
+    this.setState( {selectedGood:code} );
   },
 
   deleteThisGood: function(code) {
@@ -31,7 +36,10 @@ var GoodsBlock = React.createClass({
       React.createElement(goodCard, { key:v.code,
         name:v.name, count:v.count, 
         url:v.url, price: v.price, code:v.code,
-        cbButtonClicked:this.deleteThisGood,} )
+        cbButtonClicked:this.deleteThisGood,
+        cbTHisGoodSelected:this.GoodSelected,
+        selectedGood: this.state.selectedGood,
+      })
     );
 
     return React.DOM.table( {className:`GoodsTable`, onClick:this.paintFunction}, 

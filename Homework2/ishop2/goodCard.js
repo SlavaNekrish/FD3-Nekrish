@@ -9,16 +9,11 @@ var goodCard = React.createClass({
     price: React.PropTypes.number.isRequired, 
     url: React.PropTypes.string.isRequired, 
     cbButtonClicked: React.PropTypes.func.isRequired,
-  },
-
-  getInitialState: function() {
-    return { 
-      coloredStyle: "",
-    };
+    cbTHisGoodSelected: React.PropTypes.func.isRequired,
   },
   
   colorThisGood: function(EO) {
-    this.setState( {coloredStyle: "colored"} );
+    this.props.cbTHisGoodSelected(this.props.code);
   },
 
   buttonClicked: function(EO) {
@@ -27,7 +22,7 @@ var goodCard = React.createClass({
   },
 
   render: function() {
-      return React.DOM.tr( {className:`Good ${this.state.coloredStyle}`, onClick:this.colorThisGood},
+      return React.DOM.tr( {className:`Good ${(this.props.selectedGood===this.props.code)? "colored" : ""}`, onClick:this.colorThisGood},
         React.DOM.th({className:'1column'},this.props.name),
         React.DOM.th({className:'2column'},this.props.price),
         React.DOM.th({className:'3column'},this.props.url),
