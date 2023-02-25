@@ -23,6 +23,7 @@ var goodCard = React.createClass({
 
   buttonClicked: function(EO) {
     this.props.cbButtonClicked(this.props.code);
+    EO.stopPropagation()
   },
 
   render: function() {
