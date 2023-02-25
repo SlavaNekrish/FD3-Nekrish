@@ -21,9 +21,7 @@ var GoodsBlock = React.createClass({
   },
 
   deleteThisGood: function(code) {
-    console.log(code)
     var currentGoodsArr = this.state.goodsList.filter(n => n.code !== code);
-    console.log(currentGoodsArr)
     this.setState( {goodsList: currentGoodsArr} );
   },
 
