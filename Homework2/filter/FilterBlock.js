@@ -35,7 +35,7 @@ var FilterBlock = React.createClass({
 
   checkboxSelected: function(EO) {
     if (EO.target.checked) {
-      this.setState( {isCheckboxChecked: true} );
+      this.setState( {isCheckboxChecked: EO.target.checked} );
       this.sortThisArr(this.state.words);
       
     }
