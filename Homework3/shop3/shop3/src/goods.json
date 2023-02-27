@@ -1,0 +1,12 @@
+[ 
+      {"name":"Осьминожек", "code":1, "price":30, "url": "img/item_1.jpg", "count":165}, 
+      {"name":"Пони-лукони","code":2, "price":15, "url": "img/item_2.jpg", "count":23}, 
+      {"name":"Хаги-ваги","code":3, "price":10, "url": "img/item_3.jpg", "count":86},
+      {"name":"Чебурашка","code":4, "price":50, "url": "img/item_4.jpg", "count":11},
+      {"name":"Котенок","code":5, "price":75, "url": "img/item_5.jpg", "count":102},
+      {"name":"Мишка","code":6, "price":9, "url": "img/item_6.jpg", "count":9},
+      {"name":"Пикачу","code":7, "price":65, "url": "img/item_7.jpg", "count":92},
+      {"name":"Синяш","code":8, "price":40, "url": "img/item_8.jpg", "count":10},
+      {"name":"Тигра","code":9, "price":20, "url": "img/item_9.jpg", "count":41},
+      {"name":"Обезьянка ЧиЧиЧи","code":10, "price":35, "url": "img/item_10.jpg", "count":2}
+]
