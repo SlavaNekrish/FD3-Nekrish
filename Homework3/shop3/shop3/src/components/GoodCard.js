@@ -34,7 +34,8 @@ class GoodCard extends React.Component {
         <th className='3column'>{this.props.url}</th>
         <th className='4column'>{this.props.count}</th>
         <th className='5column'>
-          <input type='button' value='Delete' onClick={this.buttonClicked}></input>
+          <input type='button' value='Edit' />
+          <input type='button' value='Delete' onClick={this.buttonClicked} />
         </th>
       </tr>
     );

@@ -1,8 +1,48 @@
+.Wrapper {
+  position: relative;
+  display: flex;
+}
+
 table {
+  position: relative;
   border-collapse: collapse;
   margin: 40px;
+  min-width: 500px;
+}
+
+tr {
+  height: 20px;
 }
 
 th {
   border: 1px solid;
+}
+
+.ModalWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 40px;
+  width: 250px;
+  height: 300px;
+  position: absolute;
+  border: solid 3px blueviolet;
+  border-radius: 10px;
+
+}
+
+img {
+  width: 90%;
+  height: 70%;
+}
+
+h5 {
+  margin-top: 10px;
+}
+
+.NewProduct {
+  position: absolute;
+  width: 180px;
+  height: 25px;
 }

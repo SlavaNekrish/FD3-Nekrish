@@ -26,10 +26,11 @@ class Ishop3 extends React.Component {
 
   GoodSelected = (code) => {
     this.setState( {selectedGood:code} );
+    
   };
 
   deleteThisGood = (code) => {
-    const currentGoodsArr = this.state.goodsList.filter(n => n.code !== code);   //??
+    const currentGoodsArr = (window.confirm("Вы уверены, удаляем?"))? this.state.goodsList.filter(n => n.code !== code) : this.state.goodsList;   //??
     this.setState( {goodsList: currentGoodsArr} );
   };
 
@@ -45,21 +46,36 @@ class Ishop3 extends React.Component {
       />
     );
 
+    let modalCard=this.state.goodsList.filter(n => n.code === this.state.selectedGood).map( v =>
+      <div className='ModalWrapper' key={v.code}>
+        <h3>{v.name}</h3>
+        <img src={v.url} alt='modalPicture'/>
+        <h5>Price: {v.price}</h5>
+      </div>
+    )
+
+    
     return (
-      <table className='GoodsTable'>
-        <thead>
-          <tr className='tableHeader'>
-            <th className='1column'>Name</th>
-            <th className='2column'>Price</th>
-            <th className='3column'>URL</th>
-            <th className='4column'>Quantity</th>
-            <th className='5column'>Control</th>
-          </tr>
-        </thead>
-        <tbody className='allGoods'>
-          {goodsCode}
-        </tbody>
-      </table>
+      <div className='Wrapper'>
+        <table className='GoodsTable'>
+          <thead>
+            <tr className='tableHeader'>
+              <th className='1column'>Name</th>
+              <th className='2column'>Price</th>
+              <th className='3column'>URL</th>
+              <th className='4column'>Quantity</th>
+              <th className='5column'>Control</th>
+            </tr>
+          </thead>
+          <tbody className='allGoods'>
+            {goodsCode}
+          </tbody>
+          <input type='button' value='New product'className='NewProduct' />
+        </table>
+            <div>
+              {modalCard}
+            </div>
+      </div>
     )
     ;
 
