@@ -57,21 +57,23 @@ class Ishop3 extends React.Component {
     
     return (
       <div className='Wrapper'>
-        <table className='GoodsTable'>
-          <thead>
-            <tr className='tableHeader'>
-              <th className='1column'>Name</th>
-              <th className='2column'>Price</th>
-              <th className='3column'>URL</th>
-              <th className='4column'>Quantity</th>
-              <th className='5column'>Control</th>
-            </tr>
-          </thead>
-          <tbody className='allGoods'>
-            {goodsCode}
-          </tbody>
+        <div>
+          <table className='GoodsTable'>
+            <thead>
+              <tr className='tableHeader'>
+                <th className='1column'>Name</th>
+                <th className='2column'>Price</th>
+                <th className='3column'>URL</th>
+                <th className='4column'>Quantity</th>
+                <th className='5column'>Control</th>
+              </tr>
+            </thead>
+            <tbody className='allGoods'>
+              {goodsCode}
+            </tbody>
+          </table>
           <input type='button' value='New product'className='NewProduct' />
-        </table>
+        </div>
             <div>
               {modalCard}
             </div>
