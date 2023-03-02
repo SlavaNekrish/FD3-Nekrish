@@ -22,17 +22,56 @@ class Ishop3 extends React.Component {
   state = {
     goodsList: this.props.goods,
     selectedGood: null,
+    isEditing: false,
+    editingCardCode: null,
+    nameValue: '',
+    priceValue: '',
+    urlValue: '',
+    quantValue: '',
+    disableButtons: false,
   };
 
   GoodSelected = (code) => {
     this.setState( {selectedGood:code} );
-    
   };
+
+  GoodEdited = (code) => {
+    this.setState( {isEditing: true, editingCardCode: code} );
+    this.GoodSelected (code)
+  };
+
+  inputNameChange = (event) => {
+    this.setState( {nameValue: event.target.value}, this.buttonsDisabling());
+  }
+
+  inputPriceChange = (event) => {
+    this.setState( {priceValue: event.target.value}, this.buttonsDisabling() );
+  }
+
+  inputURLChange = (event) => {
+    this.setState( {urlValue: event.target.value}, this.buttonsDisabling() );
+  }
+
+  inputQuantChange = (event) => {
+    this.setState( {quantValue: event.target.value}, this.buttonsDisabling() );
+  }
+
+  //разобраться , почему buttonsDisabling не отрабатывает корректно
+
+  buttonsDisabling = () => {
+    (this.state.nameValue !== '' || this.state.priceValue !== '' ||
+    this.state.urlValue !== '' || this.state.quantValue !== '') &&
+    this.setState( {disableButtons: true} );
+    (this.state.nameValue === '' && this.state.priceValue === '' &&
+    this.state.urlValue === '' && this.state.quantValue === '') &&
+    this.setState( {disableButtons: false} );
+  }
 
   deleteThisGood = (code) => {
     const currentGoodsArr = (window.confirm("Вы уверены, удаляем?"))? this.state.goodsList.filter(n => n.code !== code) : this.state.goodsList;   //??
     this.setState( {goodsList: currentGoodsArr} );
   };
+
 
   render() {
 
@@ -42,7 +81,9 @@ class Ishop3 extends React.Component {
         url={v.url} price={v.price}
         cbButtonClicked={this.deleteThisGood}
         cbThisGoodSelected={this.GoodSelected}
-        selectedGood={this.state.selectedGood}
+        cbThisGoodEdited={this.GoodEdited}
+        selectedGood={this.state.selectedGood} 
+        disableBut={this.state.disableButtons}
       />
     );
 
@@ -72,11 +113,36 @@ class Ishop3 extends React.Component {
               {goodsCode}
             </tbody>
           </table>
-          <input type='button' value='New product'className='NewProduct' />
+          {(!this.state.isEditing) && <input type='button' value='New product'className='NewProduct' />}
         </div>
-            <div>
-              {modalCard}
-            </div>
+        <div>
+          {(!this.state.isEditing) &&  modalCard}
+        </div>
+         {
+           (this.state.isEditing) && 
+           <form>
+            <h3>Edit existing Good</h3>
+              <span>ID: {this.state.editingCardCode}</span><br />
+              <label>
+                Name:
+                <input type='text' value={this.state.nameValue} onChange={this.inputNameChange}/>
+              </label><br />
+              <label>
+                Price:
+                <input type='text' value={this.state.priceValue} onChange={this.inputPriceChange}/>
+              </label><br />
+              <label>
+                URL:
+                <input type='text' value={this.state.urlValue} onChange={this.inputURLChange}/>
+              </label><br />
+              <label>
+                Quantity:
+                <input type='text' value={this.state.quantValue} onChange={this.inputQuantChange}/>
+              </label><br />
+              <input type='button' value='Save' />
+              <input type='button' value='Cancel' />
+           </form>
+         }
       </div>
     )
     ;

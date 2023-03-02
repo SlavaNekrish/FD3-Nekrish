@@ -13,6 +13,8 @@ class GoodCard extends React.Component {
     url: PropTypes.string.isRequired,
     cbButtonClicked: PropTypes.func.isRequired,
     cbThisGoodSelected: PropTypes.func.isRequired,
+    cbThisGoodEdited: PropTypes.func.isRequired,
+    disableBut: PropTypes.bool.isRequired,
     selectedGood: PropTypes.number, // может быть null, пока ни один ответ не выбран
   };
 
@@ -25,6 +27,11 @@ class GoodCard extends React.Component {
     EO.stopPropagation()
   };
 
+  buttonEdited = (EO) => { 
+    this.props.cbThisGoodEdited(this.props.code);
+    EO.stopPropagation()
+  };
+
   render() {
 
     return (
@@ -34,8 +41,8 @@ class GoodCard extends React.Component {
         <th className='3column'>{this.props.url}</th>
         <th className='4column'>{this.props.count}</th>
         <th className='5column'>
-          <input type='button' value='Edit' />
-          <input type='button' value='Delete' onClick={this.buttonClicked} />
+          <input type='button' value='Edit' disabled={this.props.disableBut} onClick={this.buttonEdited} />
+          <input type='button' value='Delete' disabled={this.props.disableBut} onClick={this.buttonClicked} />
         </th>
       </tr>
     );
