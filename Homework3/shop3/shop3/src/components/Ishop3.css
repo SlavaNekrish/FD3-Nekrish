@@ -65,11 +65,9 @@ h5 {
 form {
   position: relative;
   margin: 10px 40px 0px 40px;
-  width:700px;
+  width:650px;
 }
 
 .fr {
-  display: float;
-  float: right;
-  margin-right: 200px;
+  margin-left: 50px;
 }
