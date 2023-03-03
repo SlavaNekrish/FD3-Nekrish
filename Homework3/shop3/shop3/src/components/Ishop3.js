@@ -120,7 +120,7 @@ class Ishop3 extends React.Component {
 
   deleteThisGood = (code) => {
     const currentGoodsArr = (window.confirm("Вы уверены, удаляем?"))? this.state.goodsList.filter(n => n.code !== code) : this.state.goodsList;   //??
-    this.setState( {goodsList: currentGoodsArr} );
+    this.setState( {goodsList: currentGoodsArr, isEditing: false} );
   };
 
 
