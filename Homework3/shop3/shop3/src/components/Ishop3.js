@@ -21,6 +21,7 @@ class Ishop3 extends React.Component {
 
   state = {
     goodsList: this.props.goods,
+    previousGood: null,
     selectedGood: null,
     isEditing: false,
     editingCardCode: null,
@@ -41,9 +42,9 @@ class Ishop3 extends React.Component {
 
   GoodEdited = (code) => {
     let editedCard = this.state.goodsList.filter(n => n.code === code);
-    this.setState( {isEditing: true, previousGood: editedCard, editingCardCode: code, nameValue: editedCard[0].name,
+    this.setState( {isEditing: true, previousGood: editedCard[0], editingCardCode: code, nameValue: editedCard[0].name,
       priceValue: editedCard[0].price, urlValue: editedCard[0].url, quantValue: editedCard[0].count} );
-    this.GoodSelected (code)
+    this.GoodSelected (code);
   };
 
   inputNameChange = (event) => {
@@ -106,11 +107,11 @@ class Ishop3 extends React.Component {
 
   saveEditing = () => {
     const editedGood = { name: this.state.nameValue, code: this.state.editingCardCode,
-            price: Number(this.state.priceValue), url: this.state.urlValue, 
-            count: Number(this.state.quantValue) };
-    const oldGoodIndex = this.state.goodsList.findIndex(el => el.name === this.state.nameValue)
+      price: Number(this.state.priceValue), url: this.state.urlValue, 
+      count: Number(this.state.quantValue) };
+    const oldGoodIndex = this.state.goodsList.findIndex(el => el.name === this.state.previousGood.name)
     this.state.goodsList.splice(oldGoodIndex, 1, editedGood)
-    this.setState( {goodsList: this.state.goodsList, isEditing: false, disableButtons: false, dontShowModal: '', 
+    this.setState( {goodsList: this.state.goodsList, isEditing: false, disableButtons: false, dontShowModal: '',  
     selectedGood: null, editingCardCode: null} );
   }
 
