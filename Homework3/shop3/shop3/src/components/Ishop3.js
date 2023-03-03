@@ -77,25 +77,25 @@ class Ishop3 extends React.Component {
 
   createError = (event) => {
     switch (event.target.className) {
-      case "Name fr":
+      case "Name":
         (event.target.value === '') ? 
         this.setState( {emptyNameError: true}, this.buttonSaveDisabling) : this.setState( {emptyNameError: false}, this.buttonSaveDisabling);  
         (Number(event.target.value) || event.target.value === '') ?
         this.setState( {notStringNameError: true}, this.buttonSaveDisabling ) : this.setState( {notStringNameError: false}, this.buttonSaveDisabling );  
       break;
-      case "Price fr":
+      case "Price":
         (event.target.value === '') ? 
         this.setState( {emptyPriceError: true}, this.buttonSaveDisabling ) : this.setState( {emptyPriceError: false}, this.buttonSaveDisabling );  
         (!Number(event.target.value) || event.target.value === '') ?
         this.setState( {notNumberPriceError: true}, this.buttonSaveDisabling ) : this.setState( {notNumberPriceError: false}, this.buttonSaveDisabling );  
       break;
-      case "URL fr":
+      case "URL":
         (event.target.value === '') ? 
         this.setState( {emptyURLError: true}, this.buttonSaveDisabling ) : this.setState( {emptyURLError: false}, this.buttonSaveDisabling );  
         (Number(event.target.value) || event.target.value === '') ?
         this.setState( {notStringURLError: true}, this.buttonSaveDisabling ) : this.setState( {notStringURLError: false}, this.buttonSaveDisabling );  
       break;
-      case "Quantity fr":
+      case "Quantity":
         (event.target.value === '') ? 
         this.setState( {emptyQuantError: true}, this.buttonSaveDisabling ) : this.setState( {emptyQuantError: false}, this.buttonSaveDisabling );  
         (!Number(event.target.value) || event.target.value === '') ?
@@ -177,25 +177,25 @@ class Ishop3 extends React.Component {
               <span>ID: {this.state.editingCardCode}</span><br />
               <label>
                 Name:
-                <input type='text' value={this.state.nameValue} className='Name fr' onChange={this.inputNameChange} onBlur={this.createError}/>
+                <input type='text' value={this.state.nameValue} className='Name' onChange={this.inputNameChange} onBlur={this.createError}/>
                 {(this.state.emptyNameError) &&  <span className='Error'>Please, fill the field</span>}
                 {(this.state.notStringNameError) &&  <span className='Error'>  Value must be a string</span>}
               </label><br />
               <label>
                 Price:
-                <input type='text' value={this.state.priceValue} className='Price fr' onChange={this.inputPriceChange} onBlur={this.createError}/>
+                <input type='text' value={this.state.priceValue} className='Price' onChange={this.inputPriceChange} onBlur={this.createError}/>
                 {(this.state.emptyPriceError) &&  <span className='Error'>Please, fill the field</span>}
                 {(this.state.notNumberPriceError) &&  <span className='Error'>  Value must be a number</span>}
               </label><br />
               <label>
                 URL:
-                <input type='text' value={this.state.urlValue} className='URL fr' onChange={this.inputURLChange} onBlur={this.createError}/>
+                <input type='text' value={this.state.urlValue} className='URL' onChange={this.inputURLChange} onBlur={this.createError}/>
                 {(this.state.emptyURLError) &&  <span className='Error'>Please, fill the field</span>}
                 {(this.state.notStringURLError) &&  <span className='Error'>  Value must be a string</span>}
               </label><br />
               <label>
                 Quantity:
-                <input type='text' value={this.state.quantValue} className='Quantity fr' onChange={this.inputQuantChange} onBlur={this.createError}/>
+                <input type='text' value={this.state.quantValue} className='Quantity' onChange={this.inputQuantChange} onBlur={this.createError}/>
                 {(this.state.emptyQuantError) &&  <span className='Error'>Please, fill the field</span>}
                 {(this.state.notNumberQuantError) &&  <span className='Error'>  Value must be a number</span>}
               </label><br />

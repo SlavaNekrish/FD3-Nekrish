@@ -65,9 +65,21 @@ h5 {
 form {
   position: relative;
   margin: 10px 40px 0px 40px;
-  width:650px;
+  width:610px;
 }
 
-.fr {
-  margin-left: 50px;
+.Name {
+  margin-left: 40px;
+}
+
+.Price {
+  margin-left: 48px;
+}
+
+.URL {
+  margin-left:53px;
+}
+
+.Quantity {
+  margin-left: 21px;
 }
