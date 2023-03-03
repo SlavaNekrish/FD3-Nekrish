@@ -55,6 +55,7 @@ h5 {
   margin-left: 10px;
   margin-right: 10px;
   color: red;
+  float: right;
 }
 
 .dontShowModal {
@@ -64,10 +65,11 @@ h5 {
 form {
   position: relative;
   margin: 10px 40px 0px 40px;
-  width: 260px;
+  width:700px;
 }
 
 .fr {
   display: float;
   float: right;
+  margin-right: 200px;
 }

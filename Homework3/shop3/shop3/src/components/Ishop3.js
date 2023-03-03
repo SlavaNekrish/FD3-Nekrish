@@ -77,25 +77,25 @@ class Ishop3 extends React.Component {
 
   createError = (event) => {
     switch (event.target.className) {
-      case "Name":
+      case "Name fr":
         (event.target.value === '') ? 
         this.setState( {emptyNameError: true}, this.buttonSaveDisabling) : this.setState( {emptyNameError: false}, this.buttonSaveDisabling);  
         (Number(event.target.value) || event.target.value === '') ?
         this.setState( {notStringNameError: true}, this.buttonSaveDisabling ) : this.setState( {notStringNameError: false}, this.buttonSaveDisabling );  
       break;
-      case "Price":
+      case "Price fr":
         (event.target.value === '') ? 
         this.setState( {emptyPriceError: true}, this.buttonSaveDisabling ) : this.setState( {emptyPriceError: false}, this.buttonSaveDisabling );  
         (!Number(event.target.value) || event.target.value === '') ?
         this.setState( {notNumberPriceError: true}, this.buttonSaveDisabling ) : this.setState( {notNumberPriceError: false}, this.buttonSaveDisabling );  
       break;
-      case "URL":
+      case "URL fr":
         (event.target.value === '') ? 
         this.setState( {emptyURLError: true}, this.buttonSaveDisabling ) : this.setState( {emptyURLError: false}, this.buttonSaveDisabling );  
         (Number(event.target.value) || event.target.value === '') ?
         this.setState( {notStringURLError: true}, this.buttonSaveDisabling ) : this.setState( {notStringURLError: false}, this.buttonSaveDisabling );  
       break;
-      case "Quantity":
+      case "Quantity fr":
         (event.target.value === '') ? 
         this.setState( {emptyQuantError: true}, this.buttonSaveDisabling ) : this.setState( {emptyQuantError: false}, this.buttonSaveDisabling );  
         (!Number(event.target.value) || event.target.value === '') ?
