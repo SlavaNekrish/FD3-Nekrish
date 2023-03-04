@@ -27,15 +27,18 @@ class Ishop3 extends React.Component {
     editingCardCode: null,
     nameValue: '', priceValue: '',
     urlValue: '', quantValue: '',
+    IDValue: '',
     disableButtons: false,
     emptyNameError: false, emptyPriceError: false, emptyURLError: false, emptyQuantError: false, 
-    notStringNameError: false, notStringURLError: false,
-    notNumberPriceError: false, notNumberQuantError: false,
+    emptyIDError: false, notStringNameError: false, notStringURLError: false,
+    notNumberPriceError: false, notNumberQuantError: false, notIDQuantError: false,
     disableSaveBut: false,
-    dontShowModal: ''
+    dontShowModal: '',
+    isAddingNewCard: false
   };
 
   GoodSelected = (code) => {
+    !this.state.isAddingNewCard &&
     this.setState( {selectedGood:code} );
 
   };
@@ -61,6 +64,10 @@ class Ishop3 extends React.Component {
 
   inputQuantChange = (event) => {
     this.setState( {quantValue: event.target.value} );
+  }
+
+  inputIDChange = (event) => {
+    this.setState( {IDValue: event.target.value} );
   }
 
   buttonsDisabling = () => {
@@ -102,6 +109,12 @@ class Ishop3 extends React.Component {
         (!Number(event.target.value) || event.target.value === '') ?
         this.setState( {notNumberQuantError: true}, this.buttonSaveDisabling ) : this.setState( {notNumberQuantError: false}, this.buttonSaveDisabling );  
       break;
+      case "ID":
+        (event.target.value === '') ? 
+        this.setState( {emptyIDError: true}, this.buttonSaveDisabling ) : this.setState( {emptyIDError: false}, this.buttonSaveDisabling );  
+        (!Number(event.target.value) || event.target.value === '') ?
+        this.setState( {notNumberIDError: true}, this.buttonSaveDisabling ) : this.setState( {notNumberIDError: false}, this.buttonSaveDisabling );  
+      break;
     }
   }
 
@@ -115,15 +128,28 @@ class Ishop3 extends React.Component {
     selectedGood: null, editingCardCode: null} );
   }
 
-  cancelEditing = () => {
+  cancelFunction = () => {
     this.setState( {isEditing: false, disableButtons: false, dontShowModal: '', selectedGood: null, emptyNameError: false, emptyPriceError: false, emptyURLError: false, emptyQuantError: false, 
-    notStringNameError: false, notStringURLError: false, notNumberPriceError: false, notNumberQuantError: false, editingCardCode: null} );
+    notStringNameError: false, notStringURLError: false, notNumberPriceError: false, notNumberQuantError: false, editingCardCode: null, isAddingNewCard: false} );
   }
 
   deleteThisGood = (code) => {
     const currentGoodsArr = (window.confirm("Вы уверены, удаляем?"))? this.state.goodsList.filter(n => n.code !== code) : this.state.goodsList;   //??
     this.setState( {goodsList: currentGoodsArr, isEditing: false} );
   };
+
+  addingGood = () => {
+    this.setState( {isAddingNewCard: true, dontShowModal: "dontShowModal", disableButtons: true, selectedGood: null} );
+  }
+
+  saveAdding = () => {
+    const newGood = { name: this.state.nameValue, code: Number(this.state.IDValue),
+      price: Number(this.state.priceValue), url: this.state.urlValue, 
+      count: Number(this.state.quantValue) };
+      this.state.goodsList.push(newGood);
+      this.setState( {goodsList: this.state.goodsList, isAddingNewCard: false, disableButtons: false, dontShowModal: '',  
+      selectedGood: null, editingCardCode: null} );
+  }
 
 
   render() {
@@ -167,7 +193,7 @@ class Ishop3 extends React.Component {
               {goodsCode}
             </tbody>
           </table>
-          {(!this.state.isEditing) && <input type='button' value='New product'className='NewProduct' />}
+          {(!this.state.isEditing && !this.state.isAddingNewCard) && <input type='button' value='New product'className='NewProduct' onClick={this.addingGood} />}
         </div>
         <div>
           {(this.state.editingCardCode !== this.state.selectedGood) && modalCard}
@@ -202,9 +228,48 @@ class Ishop3 extends React.Component {
                 {(this.state.notNumberQuantError) &&  <span className='Error'>  Value must be a number</span>}
               </label><br />
               <input type='button' value='Save'  disabled={this.state.disableSaveBut} onClick={this.saveEditing}/>
-              <input type='button' value='Cancel' onClick={this.cancelEditing}/>
+              <input type='button' value='Cancel' onClick={this.cancelFunction}/>
            </form>
          }
+         {
+           (this.state.isAddingNewCard) && 
+           <form>
+             <h3>Add new product</h3>
+             <label>
+                ID:
+                <input type='text' value={this.state.IDValue} className='ID' onChange={this.inputIDChange} onBlur={this.createError}/>
+                {(this.state.emptyIDError) &&  <span className='Error'>Please, fill the field</span>}
+                {(this.state.notNumberIDError) &&  <span className='Error'>  Value must be a number</span>}
+              </label><br />
+              <label>
+                Name:
+                <input type='text' value={this.state.nameValue} className='Name' onChange={this.inputNameChange} onBlur={this.createError}/>
+                {(this.state.emptyNameError) &&  <span className='Error'>Please, fill the field</span>}
+                {(this.state.notStringNameError) &&  <span className='Error'>  Value must be a string</span>}
+              </label><br />
+              <label>
+                Price:
+                <input type='text' value={this.state.priceValue} className='Price' onChange={this.inputPriceChange} onBlur={this.createError}/>
+                {(this.state.emptyPriceError) &&  <span className='Error'>Please, fill the field</span>}
+                {(this.state.notNumberPriceError) &&  <span className='Error'>  Value must be a number</span>}
+              </label><br />
+              <label>
+                URL:
+                <input type='text' value={this.state.urlValue} className='URL' onChange={this.inputURLChange} onBlur={this.createError}/>
+                {(this.state.emptyURLError) &&  <span className='Error'>Please, fill the field</span>}
+                {(this.state.notStringURLError) &&  <span className='Error'>  Value must be a string</span>}
+              </label><br />
+              <label>
+                Quantity:
+                <input type='text' value={this.state.quantValue} className='Quantity' onChange={this.inputQuantChange} onBlur={this.createError}/>
+                {(this.state.emptyQuantError) &&  <span className='Error'>Please, fill the field</span>}
+                {(this.state.notNumberQuantError) &&  <span className='Error'>  Value must be a number</span>}
+              </label><br />
+              <input type='button' value='Save'  disabled={this.state.disableSaveBut} onClick={this.saveAdding}/>
+              <input type='button' value='Cancel' onClick={this.cancelFunction}/>
+           </form>
+         }
+
       </div>
     )
     ;
