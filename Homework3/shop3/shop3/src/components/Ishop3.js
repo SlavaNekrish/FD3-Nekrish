@@ -117,7 +117,7 @@ class Ishop3 extends React.Component {
 
   cancelEditing = () => {
     this.setState( {isEditing: false, disableButtons: false, dontShowModal: '', selectedGood: null, emptyNameError: false, emptyPriceError: false, emptyURLError: false, emptyQuantError: false, 
-    notStringNameError: false, notStringURLError: false, notNumberPriceError: false, notNumberQuantError: false} );
+    notStringNameError: false, notStringURLError: false, notNumberPriceError: false, notNumberQuantError: false, editingCardCode: null} );
   }
 
   deleteThisGood = (code) => {
