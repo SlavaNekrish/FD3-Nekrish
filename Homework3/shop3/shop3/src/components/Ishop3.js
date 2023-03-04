@@ -139,7 +139,8 @@ class Ishop3 extends React.Component {
   };
 
   addingGood = () => {
-    this.setState( {isAddingNewCard: true, dontShowModal: "dontShowModal", disableButtons: true, selectedGood: null} );
+    this.setState( {isAddingNewCard: true, dontShowModal: "dontShowModal", disableButtons: true, selectedGood: null, 
+    nameValue: '', priceValue: '', urlValue: '', quantValue: '', IDValue: ''} );
   }
 
   saveAdding = () => {
