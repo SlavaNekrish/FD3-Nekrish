@@ -27,11 +27,10 @@ class Ishop3 extends React.Component {
     editingCardCode: null,
     nameValue: '', priceValue: '',
     urlValue: '', quantValue: '',
-    IDValue: '',
     disableButtons: false,
     emptyNameError: false, emptyPriceError: false, emptyURLError: false, emptyQuantError: false, 
-    emptyIDError: false, notStringNameError: false, notStringURLError: false,
-    notNumberPriceError: false, notNumberQuantError: false, notIDQuantError: false,
+    notStringNameError: false, notStringURLError: false,
+    notNumberPriceError: false, notNumberQuantError: false,
     disableSaveBut: false,
     dontShowModal: '',
     isAddingNewCard: false
@@ -56,23 +55,19 @@ class Ishop3 extends React.Component {
 
   inputPriceChange = (event) => {
     this.setState( {priceValue: event.target.value} );
-  }
+  };
 
   inputURLChange = (event) => {
     this.setState( {urlValue: event.target.value} );
-  }
+  };
 
   inputQuantChange = (event) => {
     this.setState( {quantValue: event.target.value} );
-  }
-
-  inputIDChange = (event) => {
-    this.setState( {IDValue: event.target.value} );
-  }
+  };
 
   buttonsDisabling = () => {
     this.setState( {disableButtons: true, dontShowModal: "dontShowModal"} );
-  }
+  };
 
   buttonSaveDisabling = () => {
     ( this.state.emptyNameError ||  this.state.emptyPriceError || this.state.emptyURLError || this.state.emptyQuantError || 
@@ -81,7 +76,7 @@ class Ishop3 extends React.Component {
     ( !this.state.emptyNameError && !this.state.emptyPriceError && !this.state.emptyURLError && !this.state.emptyQuantError && 
       !this.state.notStringNameError && !this.state.notStringURLError && !this.state.notNumberPriceError && !this.state.notNumberQuantError ) 
       && this.setState( {disableSaveBut: false} );
-  }
+  };
 
   createError = (event) => {
     switch (event.target.className) {
@@ -109,14 +104,8 @@ class Ishop3 extends React.Component {
         (!Number(event.target.value) || event.target.value === '') ?
         this.setState( {notNumberQuantError: true}, this.buttonSaveDisabling ) : this.setState( {notNumberQuantError: false}, this.buttonSaveDisabling );  
       break;
-      case "ID":
-        (event.target.value === '') ? 
-        this.setState( {emptyIDError: true}, this.buttonSaveDisabling ) : this.setState( {emptyIDError: false}, this.buttonSaveDisabling );  
-        (!Number(event.target.value) || event.target.value === '') ?
-        this.setState( {notNumberIDError: true}, this.buttonSaveDisabling ) : this.setState( {notNumberIDError: false}, this.buttonSaveDisabling );  
-      break;
     }
-  }
+  };
 
   saveEditing = () => {
     const editedGood = { name: this.state.nameValue, code: this.state.editingCardCode,
@@ -126,12 +115,12 @@ class Ishop3 extends React.Component {
     this.state.goodsList.splice(oldGoodIndex, 1, editedGood)
     this.setState( {goodsList: this.state.goodsList, isEditing: false, disableButtons: false, dontShowModal: '',  
     selectedGood: null, editingCardCode: null} );
-  }
+  };
 
   cancelFunction = () => {
     this.setState( {isEditing: false, disableButtons: false, dontShowModal: '', selectedGood: null, emptyNameError: false, emptyPriceError: false, emptyURLError: false, emptyQuantError: false, 
     notStringNameError: false, notStringURLError: false, notNumberPriceError: false, notNumberQuantError: false, editingCardCode: null, isAddingNewCard: false} );
-  }
+  };
 
   deleteThisGood = (code) => {
     const currentGoodsArr = (window.confirm("Вы уверены, удаляем?"))? this.state.goodsList.filter(n => n.code !== code) : this.state.goodsList;   //??
@@ -140,11 +129,15 @@ class Ishop3 extends React.Component {
 
   addingGood = () => {
     this.setState( {isAddingNewCard: true, dontShowModal: "dontShowModal", disableButtons: true, selectedGood: null, 
-    nameValue: '', priceValue: '', urlValue: '', quantValue: '', IDValue: ''} );
-  }
+    nameValue: '', priceValue: '', urlValue: '', quantValue: '', IDValue: '', emptyNameError: true, emptyPriceError: true, emptyURLError: true, emptyQuantError: true, 
+    emptyIDError: true, notStringNameError: true, notStringURLError: true,
+    notNumberPriceError: true, notNumberQuantError: true, notIDQuantError: true,
+    disableSaveBut: true} );
+  };
 
   saveAdding = () => {
-    const newGood = { name: this.state.nameValue, code: Number(this.state.IDValue),
+    
+    const newGood = { name: this.state.nameValue, code: this.state.goodsList.reduce((acc, cur) => acc.code > cur.code ? acc.code : cur.code) + 1,
       price: Number(this.state.priceValue), url: this.state.urlValue, 
       count: Number(this.state.quantValue) };
       this.state.goodsList.push(newGood);
@@ -176,7 +169,9 @@ class Ishop3 extends React.Component {
         </div>
       </div>
     )
-    
+
+    let createIdNumber = this.state.goodsList.reduce((acc, cur) => acc.code > cur.code ? acc.code : cur.code);
+
     return (
       <div className='Wrapper'>
         <div>
@@ -236,12 +231,7 @@ class Ishop3 extends React.Component {
            (this.state.isAddingNewCard) && 
            <form>
              <h3>Add new product</h3>
-             <label>
-                ID:
-                <input type='text' value={this.state.IDValue} className='ID' onChange={this.inputIDChange} onBlur={this.createError}/>
-                {(this.state.emptyIDError) &&  <span className='Error'>Please, fill the field</span>}
-                {(this.state.notNumberIDError) &&  <span className='Error'>  Value must be a number</span>}
-              </label><br />
+             <span>ID: {createIdNumber + 1}</span><br />
               <label>
                 Name:
                 <input type='text' value={this.state.nameValue} className='Name' onChange={this.inputNameChange} onBlur={this.createError}/>
