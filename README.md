@@ -60,7 +60,7 @@
 
 ### Задание № 4
 
-1. Проект [RainbowFrame](----). Ссылка на [пример работы](-----).
+1. Проект [RainbowFrame](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework4/RainbowFrame). Ссылка на [пример работы](-----).
 
 - Разработать новый проект RainbowFrame в папке RainbowFrame.
 - Компонент RainbowFrame должен получать в props массив цветов и строить несколько вложенных рамочек, по одной на каждый цвет (в любом порядке). Внутри рамочек должно быть то содержание, которое вложено в тег RainbowFrame.
