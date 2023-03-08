@@ -35,7 +35,7 @@
 
 ### Задание № 3
 
-1. Проект [ishop3](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework3/shop3/shop3).Ссылка на [пример работы](----).
+1. Проект [ishop3](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework3/shop3/shop3). Ссылка на [пример работы](----).
 
 - На основе проекта ishop2 разработать проект ishop3 (интернет-магазин) в папке ishop3.
 - Переработать проект для сборку под npm.
