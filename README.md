@@ -75,7 +75,7 @@
 
 ### Задание № 5
 
-1. Проект [RainbowFrameHOC](------). Ссылка на [пример работы](------).
+1. Проект [RainbowFrameHOC](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework5/RainbowFrameHOC). Ссылка на [пример работы](------).
 
 - На основе проекта RainbowFrame разработать новый проект RainbowFrameHOC в папке RainbowFrameHOC.
 - Возможность обернуть компонент в несколько цветных рамок должна быть реализована в виде HOC withRainbowFrame. Цвета рамочек задаются массивом цветов. Внутри рамочек должно быть то содержание, которое вложено в оборачиваемый тег.
