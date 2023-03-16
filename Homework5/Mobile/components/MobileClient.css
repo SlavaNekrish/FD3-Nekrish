@@ -1,0 +1,28 @@
+﻿.MobileClient
+{
+  padding: 2px 0;
+  margin: 10px 0px;
+}
+
+.MobileClient th {
+  height: 20px;
+  width: 50px;
+  padding: 10px;
+  font-weight: normal;
+}
+
+.MobileClient [type='text'] {
+  width: 45px;
+}
+
+.MobileClientBalanceActive 
+{
+  background-color: green;
+}
+
+.MobileClientBalanceBlocked
+{
+  background-color: red;
+}
+
+
