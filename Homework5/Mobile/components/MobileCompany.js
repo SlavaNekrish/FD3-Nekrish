@@ -34,6 +34,7 @@ class MobileCompany extends React.PureComponent {
   };
 
   editClient = (elem) => {
+    console.log(elem);
     let changed=false;
     let newClients=[...this.state.clients]; // копия самого массива клиентов
     newClients.forEach( (c,i) => {
@@ -45,11 +46,14 @@ class MobileCompany extends React.PureComponent {
         newClient.otch=elem.FIO.otch;
         newClient.id=elem.id;
         newClients[i]=newClient;
+        console.log(newClient);
         changed=true;
       }
     } );
     if ( changed )
+      console.log(newClients);
       this.setState({clients:newClients});
+      console.log(this.state.clients)
   }
 
   render() {

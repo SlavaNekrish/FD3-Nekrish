@@ -31,8 +31,8 @@ class MobileClient extends React.PureComponent {
 
   componentDidUpdate = (oldProps, oldState) => {
     console.log("MobileClient id="+this.props.id+" componentDidUpdate");
-    if ( this.props.balance!==this.state.balance )
-      this.setState({balance:this.props.balance});
+    if ( this.props.balance!==this.state.balance || this.props.FIO!==this.state.FIO)
+      this.setState({balance:this.props.balance, FIO: this.props.FIO});
   };
 
   theClientEdited = (EO) => {
@@ -45,6 +45,7 @@ class MobileClient extends React.PureComponent {
       },
       balance: this.newBalance.current ? +this.newBalance.current.value : this.props.balance,
   }
+    console.log(elem);
     mobileEvents.emit('ClientEdited', elem);
 
     this.setState({workMode: 1})
