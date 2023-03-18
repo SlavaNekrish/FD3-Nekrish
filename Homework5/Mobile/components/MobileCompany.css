@@ -1,3 +1,7 @@
 ﻿.tableHeader th  {
   padding: 10px;
 }
+
+[type='text'] {
+  width: 45px;
+}
