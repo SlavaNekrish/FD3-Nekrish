@@ -118,7 +118,7 @@
 - Кнопки переключения "МТС" и "Velcom" убрать.
 
 ### Задание № 7
-1. Проект [FilterHook]([-----](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework6/FilterHook)). Ссылка на [пример работы](-----).
+1. Проект [FilterHook](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework6/FilterHook)). Ссылка на [пример работы](-----).
 - Разработать новый проект FilterHook в папке FilterHook. Поведение должно быть аналогично описанному для домашнего задания Filter.
 > - разложить на три компонента — Controls (сортировка, фильтр, сброс), List (результирующий список) и Filter (объединяет Controls и List);
 > - использовать функциональные компоненты и хуки;
