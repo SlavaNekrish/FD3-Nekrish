@@ -1,18 +1,18 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 
 const List = props => {
 
-  const [words,setWords]=useState(props.children);
 
-  let wordsCode=words.map( v =>
+  let wordsCode=props.children.map( v =>
     <option key={v.code}>{v.text}</option>
   );
 
   return (
-    <select>
+    <select size="6">
       {wordsCode}
     </select>
   );
+ 
 } 
 
 export default List;
