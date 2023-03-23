@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
 
-const Controls = props => {
+const Controls = ({wordsForChanging, cbGetChangeList}) => {
 
   const [isCheckboxChecked, chBoxSelected]=useState(false);
   const [InputValue, InptTxtChanged]=useState("");
-  const [words,setWords]=useState(props.wordsForChanging);
+  const [words,setWords]=useState(wordsForChanging);
   const [previousWords,setPreviousWords]=useState(null);
 
   // функции сортировки списка
 
   const sortThisArr = (sortList) => {
     let currentWordsArr = sortList.slice();
-    currentWordsArr.sort((prev, next) => {
-      if (prev.text < next.text)
-      return -1;
-      else if (prev.text > next.text)
-      return 1;
-    })
+    currentWordsArr.sort((prev, next) => prev.text.localeCompare(next.text))
     setWords(currentWordsArr);
     setPreviousWords(sortList);
-    props.cbGetChangeList(currentWordsArr);
+    cbGetChangeList(currentWordsArr);
   }
 
   const checkboxSelected = (EO) => {
@@ -30,7 +25,7 @@ const Controls = props => {
     else {
       chBoxSelected(false);
       setWords(previousWords);
-      props.cbGetChangeList(previousWords);
+      cbGetChangeList(previousWords);
     }
   }
 
@@ -42,22 +37,22 @@ const Controls = props => {
     if (isCheckboxChecked) sortThisArr(filteredArray)
     else {
       setWords(filteredArray);
-      props.cbGetChangeList(filteredArray);
+      cbGetChangeList(filteredArray);
       setPreviousWords(currentWordsArr);
     }
   }
 
   const InputTextChanged = (EO) => {
     InptTxtChanged(EO.target.value) 
-    filterThisArr(EO.target.value, props.wordsForChanging)
+    filterThisArr(EO.target.value, wordsForChanging)
   }
 
   // сброс к изначальному состоянию
 
   const clearInputs = () => {
     if (isCheckboxChecked || InputValue) {
-      setWords(props.wordsForChanging);
-      props.cbGetChangeList(props.wordsForChanging);
+      setWords(wordsForChanging);
+      cbGetChangeList(wordsForChanging);
       chBoxSelected(false);
       InptTxtChanged("")
     }
