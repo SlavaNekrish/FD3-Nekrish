@@ -124,9 +124,9 @@
 > - использовать функциональные компоненты и хуки;
 > - использовать коллбеки (не event emitter).
 
-### Задание № 7
+### Задание № 8
 1. Проект [HOFwithTooltip](https://github.com/SlavaNekrish/FD3-Nekrish/tree/master/Homework6/HOFwithTooltip). Ссылка на [пример работы](-----).
-- Напишите HOF withTooltip.
+   Напишите HOF withTooltip.
 Первые скобки после вызова HOF - два аргумента:
  - JSX-код, который будет всплывать на тултипе;
  - кол-во миллисекунд.
