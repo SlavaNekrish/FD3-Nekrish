@@ -9,14 +9,21 @@ function Sort() {
     { name: 'алфавиту', code: 2 },
   ];
 
+  const onClickSelectedItem = (i) => {
+    setSelected(i);
+    setOpen(false);
+  };
+
   const list = listArr.map((el) => (
     <li
-      onClick={() => setSelected(el.code)}
+      onClick={() => onClickSelectedItem(el.code)}
       className={selected === el.code ? 'active' : ''}
       key={el.code}>
       {el.name}
     </li>
   ));
+
+  const sortName = list[selected];
 
   return (
     <div className="sort">
@@ -33,7 +40,7 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!isVisible)}>{selected}</span>
+        <span onClick={() => setOpen(!isVisible)}>{sortName}</span>
       </div>
       {isVisible && (
         <div className="sort__popup">
