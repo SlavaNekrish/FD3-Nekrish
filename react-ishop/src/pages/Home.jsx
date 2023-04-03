@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -6,8 +6,12 @@ import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 
 const Home = ({ isLoading, items }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <>
+    <div className="container">
       {' '}
       <div className="content__top">
         <Categories />
@@ -23,7 +27,7 @@ const Home = ({ isLoading, items }) => {
               </React.Fragment>
             ))}
       </div>
-    </>
+    </div>
   );
 };
 

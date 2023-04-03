@@ -7,6 +7,12 @@ body {
   background-color: $background;
 }
 
+::-webkit-scrollbar {
+  /* chrome based */
+  width: 0px; /* ширина scrollbar'a */
+  background: transparent; /* опционально */
+}
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
@@ -14,6 +20,10 @@ body {
   margin: 50px auto;
   border-radius: 10px;
   max-width: 1400px;
+  @media (max-width: 645px) {
+    width: calc(100vw - 30px);
+    margin-top: 15px;
+  }
 }
 
 .content {
@@ -24,15 +34,79 @@ body {
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 11px;
+
+    @media (max-width: 1400px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1060px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 730px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 1292px) {
+      // flex-direction: column;
+      align-items: baseline;
+      .categories {
+        width: 750px;
+        overflow: scroll;
+
+        ul {
+          width: 100%;
+        }
+      }
+    }
+    @media (max-width: 1235px) {
+      .categories {
+        width: 600px;
+      }
+    }
+
+    @media (max-width: 1060px) {
+      .categories {
+        width: 500px;
+      }
+    }
+    @media (max-width: 960px) {
+      .categories {
+        width: 400px;
+      }
+    }
+    @media (max-width: 840px) {
+      align-items: center;
+      flex-direction: column;
+      .categories {
+        margin-bottom: 30px;
+        width: 420px;
+      }
+    }
+    @media (max-width: 540px) {
+      .categories {
+        width: 300px;
+      }
+    }
+    @media (max-width: 390px) {
+      .categories {
+        ul {
+          li {
+            padding: 8px 20px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -103,6 +177,10 @@ body {
         color: darken($color: #b6b6b6, $amount: 50);
       }
     }
+  }
+
+  .content__items {
+    display: block;
   }
 
   &__item {
