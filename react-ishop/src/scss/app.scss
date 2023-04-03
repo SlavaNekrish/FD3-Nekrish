@@ -57,11 +57,11 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width: 1292px) {
+    @media (max-width: 1400px) {
       // flex-direction: column;
       align-items: baseline;
       .categories {
-        width: 750px;
+        width: 700px;
         overflow: scroll;
 
         ul {
@@ -71,21 +71,21 @@ body {
     }
     @media (max-width: 1235px) {
       .categories {
-        width: 600px;
+        width: 580px;
       }
     }
 
-    @media (max-width: 1060px) {
+    @media (max-width: 1100px) {
       .categories {
-        width: 500px;
+        width: 480px;
       }
     }
-    @media (max-width: 960px) {
+    @media (max-width: 1000px) {
       .categories {
-        width: 400px;
+        width: 380px;
       }
     }
-    @media (max-width: 840px) {
+    @media (max-width: 870px) {
       align-items: center;
       flex-direction: column;
       .categories {

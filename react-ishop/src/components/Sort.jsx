@@ -1,29 +1,29 @@
 import { useState } from 'react';
 
-function Sort() {
+function Sort({ value, onChangeSort }) {
   const [isVisible, setOpen] = useState(false);
-  const [selected, setSelected] = useState(0);
   const listArr = [
-    { name: 'популярности', code: 0 },
-    { name: 'цене', code: 1 },
-    { name: 'алфавиту', code: 2 },
+    { name: 'популярности DESC', code: 0, sortProp: 'rating' },
+    { name: 'популярности ASC', code: 1, sortProp: '-rating' },
+    { name: 'цене DESC', code: 2, sortProp: 'price' },
+    { name: 'цене ASC', code: 3, sortProp: '-price' },
+    { name: 'алфавиту DESC', code: 4, sortProp: 'title' },
+    { name: 'алфавиту ASC', code: 5, sortProp: '-title' },
   ];
 
   const onClickSelectedItem = (i) => {
-    setSelected(i);
+    onChangeSort(i);
     setOpen(false);
   };
 
-  const list = listArr.map((el) => (
+  const list = listArr.map((obj) => (
     <li
-      onClick={() => onClickSelectedItem(el.code)}
-      className={selected === el.code ? 'active' : ''}
-      key={el.code}>
-      {el.name}
+      onClick={() => onClickSelectedItem(obj)}
+      className={value.sortProp === obj.sortProp ? 'active' : ''}
+      key={obj.code}>
+      {obj.name}
     </li>
   ));
-
-  const sortName = list[selected];
 
   return (
     <div className="sort">
@@ -40,7 +40,7 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!isVisible)}>{sortName}</span>
+        <span onClick={() => setOpen(!isVisible)}>{value.name}</span>
       </div>
       {isVisible && (
         <div className="sort__popup">
