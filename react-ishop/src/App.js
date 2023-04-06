@@ -11,11 +11,14 @@ import NotFound from './pages/NotFound';
 export const SearchContext = React.createContext();
 
 function App() {
-  const [searchValue, setsearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+
+  // const count = useSelector((state) => state.counter.count);
+  // const dispatch = useDispatch();
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setsearchValue }}>
+      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
         <Header />
         <div className="content">
           <Routes>

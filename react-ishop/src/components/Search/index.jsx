@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
+import debounce from 'lodash.debounce';
 
 import styles from './Search.module.scss';
 import { SearchContext } from '../../App';
 
 const Search = () => {
-  const { searchValue, setsearchValue } = React.useContext(SearchContext);
+  const [value, setValue] = useState(''); // быстрое отражение данных в input
+  const { setSearchValue } = React.useContext(SearchContext); // за последующее изменение данных в input
+  const inputRef = useRef();
+
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 300),
+    [],
+  );
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
+  };
+
+  const onCLickClear = () => {
+    setSearchValue('');
+    setValue('');
+    inputRef.current.focus();
+  };
+
   return (
     <div className={styles.root}>
       <svg
@@ -20,14 +42,15 @@ const Search = () => {
         />
       </svg>
       <input
-        value={searchValue}
-        onChange={(event) => setsearchValue(event.target.value)}
+        ref={inputRef}
+        value={value}
+        onChange={onChangeInput}
         className={styles.input}
         placeholder="Поиск товара.."
       />
-      {searchValue && (
+      {value && (
         <svg
-          onClick={() => setsearchValue('')}
+          onClick={onCLickClear}
           className={styles.clearIcon}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg">
