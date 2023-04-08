@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import qs from 'qs';
-import axios from 'axios';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 // import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import { fetchItems } from '../redux/slices/itemSlice';
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -19,11 +20,10 @@ const Home = () => {
   // const isSearch = useRef(false);
   // const isMounted = useRef(false);
 
+  const { items, status } = useSelector((state) => state.item);
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
 
   const { searchValue } = React.useContext(SearchContext);
-  const [items, setItems] = useState([]);
-  const [isLoading, setLoading] = useState(true);
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -33,22 +33,21 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchItems = () => {
-    setLoading(true);
-
+  const getItems = async () => {
     const sortBy = sort.sortProp.replace('-', '');
     const order = sort.sortProp.includes('-') ? 'asc' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    axios
-      .get(
-        `https://64295fee5a40b82da4d189a9.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-        setLoading(false);
-      });
+    dispatch(
+      fetchItems({
+        sortBy,
+        order,
+        category,
+        search,
+        currentPage,
+      }),
+    );
   };
 
   // если изменили параметры и был первый рендер
@@ -86,7 +85,7 @@ const Home = () => {
     window.scrollTo(0, 0);
 
     // if (!isSearch.current) {
-    fetchItems();
+    getItems();
     // }
     // isSearch.current = false;
   }, [categoryId, sort.sortProp, searchValue, currentPage]);
@@ -107,7 +106,14 @@ const Home = () => {
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{isLoading ? skeletons : pizzas}</div>
+      {status === 'error' ? (
+        <div className="content__error-info">
+          <h2> Произошла ошибка 😕 </h2>
+          <p>К сожалению, не удалось получить товары. Попробуйте повторить попытку позже</p>
+        </div>
+      ) : (
+        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
+      )}
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
   );
