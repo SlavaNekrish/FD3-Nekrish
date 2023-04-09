@@ -28,11 +28,12 @@ const cartSlicee = createSlice({
       const findItem = state.items.find((obj) => obj.id === action.payload);
       if (findItem) {
         findItem.count--;
+        state.totalPrice -= findItem.price; // рефакторинг
       }
     },
     removeItem(state, action) {
-      const findItem = state.items.find((obj) => obj.id === action.payload); // рефакторинг
-      state.totalPrice -= findItem.price * findItem.count;
+      const findItem = state.items.find((obj) => obj.id === action.payload);
+      state.totalPrice -= findItem.price * findItem.count; // рефакторинг
       state.items = state.items.filter((obj) => obj.id !== action.payload);
     },
     clearItems(state) {
@@ -41,6 +42,9 @@ const cartSlicee = createSlice({
     },
   },
 });
+
+export const selectCart = (state) => state.cart;
+export const selectCartItemById = (id) => (state) => state.cart.items.find((obj) => obj.id === id);
 
 export const { addItem, removeItem, minusItem, clearItems } = cartSlicee.actions;
 

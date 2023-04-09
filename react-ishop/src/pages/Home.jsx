@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import qs from 'qs';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +11,8 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 // import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
-import { fetchItems } from '../redux/slices/itemSlice';
+import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import { fetchItems, selectItemData } from '../redux/slices/itemSlice';
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -20,14 +20,12 @@ const Home = () => {
   // const isSearch = useRef(false);
   // const isMounted = useRef(false);
 
-  const { items, status } = useSelector((state) => state.item);
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const { items, status } = useSelector(selectItemData);
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
-  const { searchValue } = React.useContext(SearchContext);
-
-  const onChangeCategory = (id) => {
+  const onChangeCategory = useCallback((id) => {
     dispatch(setCategoryId(id));
-  };
+  }, []);
 
   const onChangePage = (number) => {
     dispatch(setCurrentPage(number));
@@ -103,7 +101,7 @@ const Home = () => {
       {' '}
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

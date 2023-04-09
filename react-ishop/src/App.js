@@ -3,32 +3,25 @@ import './scss/app.scss';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
-import Header from './components/Header';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import FullItem from './pages/FullItem';
 import NotFound from './pages/NotFound';
-
-export const SearchContext = React.createContext();
+import MainLayout from './layouts/MainLayout';
 
 function App() {
-  const [searchValue, setSearchValue] = useState('');
-
   // const count = useSelector((state) => state.counter.count);
   // const dispatch = useDispatch();
 
   return (
-    <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </SearchContext.Provider>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route path="" element={<Home />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="fullItem/:id" element={<FullItem />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

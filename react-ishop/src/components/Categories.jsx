@@ -1,4 +1,6 @@
-function Categories({ value, onChangeCategory }) {
+import React from 'react';
+
+const Categories = React.memo(({ value, onChangeCategory }) => {
   const catArr = [
     { name: 'Все', code: 0 },
     { name: 'Мясные', code: 1 },
@@ -22,6 +24,6 @@ function Categories({ value, onChangeCategory }) {
       <ul>{categories}</ul>
     </div>
   );
-}
+});
 
 export default Categories;
