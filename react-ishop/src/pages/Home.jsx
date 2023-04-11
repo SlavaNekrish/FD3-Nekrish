@@ -4,12 +4,10 @@ import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import Categories from '../components/Categories';
-import Sort, { listArr } from '../components/Sort';
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
+import { Categories, Sort, PizzaBlock, Skeleton, Pagination } from '../components';
+
+import { listArr } from '../components/Sort';
+
 // import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import { fetchItems, selectItemData } from '../redux/slices/itemSlice';
@@ -46,6 +44,7 @@ const Home = () => {
         currentPage,
       }),
     );
+    window.scrollTo(0, 0);
   };
 
   // если изменили параметры и был первый рендер
@@ -80,8 +79,6 @@ const Home = () => {
 
   // если был первый рендер, то запрашиваем товары
   useEffect(() => {
-    window.scrollTo(0, 0);
-
     // if (!isSearch.current) {
     getItems();
     // }

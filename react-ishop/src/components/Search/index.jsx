@@ -8,12 +8,12 @@ import styles from './Search.module.scss';
 const Search = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(''); // быстрое отражение данных в input
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   const updateSearchValue = useCallback(
     debounce((str) => {
       dispatch(setSearchValue(str));
-    }, 300),
+    }, 150),
     [],
   );
 
@@ -25,7 +25,7 @@ const Search = () => {
   const onCLickClear = () => {
     dispatch(setSearchValue(''));
     setValue('');
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   return (
