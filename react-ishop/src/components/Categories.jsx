@@ -1,15 +1,14 @@
 import React from 'react';
 
-const Categories = React.memo(({ value, onChangeCategory }) => {
-  const catArr = [
-    { name: 'Все', code: 0 },
-    { name: 'Мясные', code: 1 },
-    { name: 'Вегетарианские', code: 2 },
-    { name: 'Гриль', code: 3 },
-    { name: 'Острые', code: 4 },
-    { name: 'Закрытые', code: 5 },
-  ];
+export const catArr = [
+  { name: 'Все', code: 0 },
+  { name: 'Готовые сеты', code: 1 },
+  { name: 'Коробки шаров', code: 2 },
+  { name: 'Цифры и шары', code: 3 },
+  { name: 'Фольгированные', code: 4 },
+];
 
+const Categories = React.memo(({ value, onChangeCategory }) => {
   const categories = catArr.map((category) => (
     <li
       onClick={() => onChangeCategory(category.code)}

@@ -29,12 +29,8 @@ const FullItem = () => {
     <div className="container">
       <img src={item.imageUrl} />
       <h2>{item.title}</h2>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam accusamus natus debitis
-        aliquam in sint distinctio harum ut temporibus beatae ipsum recusandae qui, aliquid officiis
-        quam voluptate voluptates minima ducimus.
-      </p>
-      <h4>{item.price} ₽</h4>
+      <p>{item.description}</p>
+      <h4>{item.price} Br</h4>
       <Link to="/">
         <button className="button button--outline button--add">
           <span>Назад</span>

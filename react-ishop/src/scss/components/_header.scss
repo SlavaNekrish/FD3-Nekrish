@@ -19,6 +19,8 @@
 
   &__logo {
     display: flex;
+    justify-content: center;
+    align-items: flex-end;
 
     img {
       margin-right: 15px;
@@ -32,8 +34,11 @@
       font-weight: 800;
     }
 
-    p {
+    span {
       color: #7b7b7b;
+      margin-left: 10px;
+      font-style: italic;
+      font-size: 20px;
     }
   }
 }

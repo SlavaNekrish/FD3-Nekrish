@@ -1,6 +1,6 @@
 @import '../variables';
 
-.pizza-block {
+.balloon-block {
   width: 280px;
   text-align: center;
   margin-bottom: 65px;
@@ -26,6 +26,7 @@
     background-color: #f3f3f3;
     border-radius: 10px;
     flex-direction: column;
+
     padding: 6px;
 
     ul {
@@ -33,7 +34,7 @@
       flex: 1;
 
       &:first-of-type {
-        margin-bottom: 6px;
+        margin: 3px 0px;
       }
 
       li {

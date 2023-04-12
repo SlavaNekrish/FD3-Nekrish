@@ -4,9 +4,10 @@ import qs from 'qs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { Categories, Sort, PizzaBlock, Skeleton, Pagination } from '../components';
+import { Categories, Sort, BalloonBlock, Skeleton, Pagination } from '../components';
 
 import { listArr } from '../components/Sort';
+import { catArr } from '../components/Categories';
 
 // import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
@@ -85,9 +86,9 @@ const Home = () => {
     // isSearch.current = false;
   }, [categoryId, sort.sortProp, searchValue, currentPage]);
 
-  const pizzas = items.map((el) => (
+  const balloons = items.map((el) => (
     <React.Fragment key={el.id}>
-      <PizzaBlock {...el} />
+      <BalloonBlock {...el} />
     </React.Fragment>
   ));
 
@@ -100,14 +101,14 @@ const Home = () => {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <Sort value={sort} />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
+      <h2 className="content__title">Главная / {catArr[categoryId].name}</h2>
       {status === 'error' ? (
         <div className="content__error-info">
           <h2> Произошла ошибка 😕 </h2>
           <p>К сожалению, не удалось получить товары. Попробуйте повторить попытку позже</p>
         </div>
       ) : (
-        <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
+        <div className="content__items">{status === 'loading' ? skeletons : balloons}</div>
       )}
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>

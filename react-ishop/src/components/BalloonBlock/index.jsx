@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem, selectCartItemById } from '../../redux/slices/cartSlicee';
 import { Link } from 'react-router-dom';
 
-const typeNames = ['тонкое', 'традиционное'];
+const typeNames = ['воздушные', 'гелевые'];
 
-function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
+function BalloonBlock({ id, title, price, imageUrl, types }) {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = useState(0);
-  const [activeSize, setActiveSyze] = useState(0);
 
   const addedCount = cartItem ? cartItem.count : 0;
 
@@ -21,19 +20,18 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
       price,
       imageUrl,
       type: typeNames[activeType],
-      size: sizes[activeSize],
     };
     dispatch(addItem(item));
   };
 
   return (
-    <div className="pizza-block-wrapper">
-      <div className="pizza-block">
+    <div className="balloon-block-wrapper">
+      <div className="balloon-block">
         <Link to={`/fullItem/${id}`}>
-          <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
-          <h4 className="pizza-block__title">{title}</h4>
+          <img className="balloon-block__image" src={imageUrl} alt="Balloon" />
+          <h4 className="balloon-block__title">{title}</h4>
         </Link>
-        <div className="pizza-block__selector">
+        <div className="balloon-block__selector">
           <ul>
             {types.map((typeId, i) => (
               <li
@@ -44,19 +42,9 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
               </li>
             ))}
           </ul>
-          <ul>
-            {sizes.map((size, i) => (
-              <li
-                onClick={() => setActiveSyze(i)}
-                className={activeSize === i ? 'active' : ''}
-                key={size}>
-                {size} см.
-              </li>
-            ))}
-          </ul>
         </div>
-        <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от {price} ₽</div>
+        <div className="balloon-block__bottom">
+          <div className="balloon-block__price">{price} Br</div>
           <button onClick={onClickAdd} className="button button--outline button--add">
             <svg
               width="12"
@@ -78,4 +66,4 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
   );
 }
 
-export default PizzaBlock;
+export default BalloonBlock;

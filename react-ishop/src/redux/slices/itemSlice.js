@@ -1,14 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { isEqualCreator } from '../../utils/isEqualCreator';
 
-export const fetchItems = createAsyncThunk('item/fetchItemsStatus', async (params) => {
-  const { sortBy, order, category, search, currentPage } = params;
-  const { data } = await axios.get(
-    `https://64295fee5a40b82da4d189a9.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
-  );
+const determineEquals = isEqualCreator();
 
-  return data;
-});
+export const fetchItems = createAsyncThunk(
+  'item/fetchItemsStatus',
+  async (params) => {
+    const { sortBy, order, category, search, currentPage } = params;
+    const { data } = await axios.get(
+      `https://64295fee5a40b82da4d189a9.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
+    );
+
+    return data;
+  },
+  {
+    condition: (parameters) => determineEquals(parameters),
+  },
+);
 
 const initialState = {
   items: [],

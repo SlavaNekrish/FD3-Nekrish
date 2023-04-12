@@ -1,5 +1,5 @@
-export { default as Skeleton } from './PizzaBlock/Skeleton';
-export { default as PizzaBlock } from './PizzaBlock';
+export { default as Skeleton } from './BalloonBlock/Skeleton';
+export { default as BalloonBlock } from './BalloonBlock';
 export { default as Categories } from './Categories';
 export { default as CartItem } from './CartItem';
 export { default as CartEmpty } from './CartEmpty';
