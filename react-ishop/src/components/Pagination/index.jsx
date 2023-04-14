@@ -12,8 +12,8 @@ const Pagination = ({ currentPage, onChangePage }) => {
       nextLabel=">"
       previousLabel="<"
       onPageChange={(event) => onChangePage(event.selected + 1)} // т.к. возвращает индекс массива страниц
-      pageRangeDisplayed={4}
-      pageCount={3}
+      pageRangeDisplayed={8}
+      pageCount={2}
       forcePage={currentPage - 1}
       renderOnZeroPageCount={null}
     />

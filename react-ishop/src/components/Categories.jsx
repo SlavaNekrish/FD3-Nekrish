@@ -5,7 +5,7 @@ export const catArr = [
   { name: 'Готовые сеты', code: 1 },
   { name: 'Коробки шаров', code: 2 },
   { name: 'Цифры и шары', code: 3 },
-  { name: 'Фольгированные', code: 4 },
+  { name: 'Арки из шаров', code: 4 },
 ];
 
 const Categories = React.memo(({ value, onChangeCategory }) => {

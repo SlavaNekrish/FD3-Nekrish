@@ -12,6 +12,9 @@ import { catArr } from '../components/Categories';
 // import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import { selectFilter, setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import { fetchItems, selectItemData } from '../redux/slices/itemSlice';
+import BackToTop from '../components/BackToTop';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -102,15 +105,19 @@ const Home = () => {
         <Sort value={sort} />
       </div>
       <h2 className="content__title">Главная / {catArr[categoryId].name}</h2>
-      {status === 'error' ? (
-        <div className="content__error-info">
-          <h2> Произошла ошибка 😕 </h2>
-          <p>К сожалению, не удалось получить товары. Попробуйте повторить попытку позже</p>
-        </div>
-      ) : (
-        <div className="content__items">{status === 'loading' ? skeletons : balloons}</div>
-      )}
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      <Box>
+        <Toolbar id="back-to-top-anchor" />
+        {status === 'error' ? (
+          <div className="content__error-info">
+            <h2> Произошла ошибка 😕 </h2>
+            <p>К сожалению, не удалось получить товары. Попробуйте повторить попытку позже</p>
+          </div>
+        ) : (
+          <div className="content__items">{status === 'loading' ? skeletons : balloons}</div>
+        )}
+        {categoryId !== 0 && <Pagination currentPage={currentPage} onChangePage={onChangePage} />}
+      </Box>
+      {categoryId === 0 && <BackToTop />}
     </div>
   );
 };
