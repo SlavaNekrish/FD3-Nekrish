@@ -381,13 +381,13 @@
   },
   {
     "id": "311",
-    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/balloonsitacademy.appspot.com/o/compWithNumb23.jpg?alt=media&token=e8b39fcb-d26a-43d7-ac3a-1dd001c576f3",
-    "title": "Сет ДР женщины",
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/balloonsitacademy.appspot.com/o/compWithNumb2019.webp?alt=media&token=0c86ff61-4c83-4a92-ad0c-515194a4be26",
+    "title": "Сет на выпускной",
     "types": [0, 1],
-    "price": 380,
+    "price": 640,
     "category": 3,
-    "rating": 6,
-    "description": "2 цифры, фонтан из 9 фольгированных и латексных шаров. Цвета шаров: серебристые, розовые и белые"
+    "rating": 5,
+    "description": "В набор входит: 4 стойки с цифрой, 6 простых и 6 с надписью фольгированных шаров"
   },
   {
     "id": "312",
@@ -522,11 +522,21 @@
   {
     "id": "411",
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/balloonsitacademy.appspot.com/o/arka12.webp?alt=media&token=cb2cf1b9-e37e-4e72-95b7-0946aaa6cd48",
-    "title": "Арка для входа",
+    "title": "Для магазина в ТЦ",
     "types": [0, 1],
     "price": 420,
     "category": 4,
     "rating": 6,
     "description": "Стандартное плетение шаров. Трёхцветная колонна для оформления магазинов в торговых центрах."
+  },
+  {
+    "id": "412",
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/balloonsitacademy.appspot.com/o/arka13.webp?alt=media&token=957666e7-13f2-4772-bbaa-a437ae69d2b0",
+    "title": "Свадебная арка",
+    "types": [0, 1],
+    "price": 470,
+    "category": 4,
+    "rating": 7,
+    "description": "Разноколиберная гирлянда из шаров в технике «дабл стафф» 8 метров."
   }
 ]

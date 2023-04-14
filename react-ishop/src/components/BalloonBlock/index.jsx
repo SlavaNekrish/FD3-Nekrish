@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { addItem, selectCartItemById } from '../../redux/slices/cartSlicee';
 import { Link } from 'react-router-dom';
+import ToolTipStyled from '../ToolTipStyled';
 
 const typeNames = ['воздушные', 'гелевые'];
 
@@ -27,10 +28,16 @@ function BalloonBlock({ id, title, price, imageUrl, types }) {
   return (
     <div className="balloon-block-wrapper">
       <div className="balloon-block">
-        <Link to={`/fullItem/${id}`}>
-          <img className="balloon-block__image" src={imageUrl} alt="Balloon" />
-          <h4 className="balloon-block__title">{title}</h4>
-        </Link>
+        <ToolTipStyled
+          title="Клик для подробной инфо"
+          enterDelay={2000}
+          leaveDelay={0}
+          followCursor>
+          <Link to={`/fullItem/${id}`}>
+            <img className="balloon-block__image" src={imageUrl} alt="Balloon" />
+            <h4 className="balloon-block__title">{title}</h4>
+          </Link>
+        </ToolTipStyled>
         <div className="balloon-block__selector">
           <ul>
             {types.map((typeId, i) => (

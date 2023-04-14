@@ -4,7 +4,7 @@ const initialState = {
   searchValue: '',
   categoryId: 0,
   currentPage: 1,
-  sort: { name: 'популярности DESC', code: 0, sortProp: 'rating' },
+  sort: { name: 'популярности 🡓', code: 0, sortProp: 'rating' },
 };
 
 const filterSlice = createSlice({

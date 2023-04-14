@@ -6,3 +6,5 @@ export { default as CartEmpty } from './CartEmpty';
 export { default as Pagination } from './Pagination';
 export { default as NotFoundBlock } from './NotFoundBlock';
 export { default as Sort } from './Sort';
+export { default as BackToTop } from './BackToTop';
+export { default as ToolTipStyled } from './ToolTipStyled';

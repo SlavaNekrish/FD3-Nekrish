@@ -1,17 +1,17 @@
 import React from 'react';
 
 import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectSort, setSort } from '../redux/slices/filterSlice';
+import { useDispatch } from 'react-redux';
+import { setSort } from '../redux/slices/filterSlice';
 import { useEffect } from 'react';
 
-export const listArr = [
-  { name: 'популярности DESC', code: 0, sortProp: 'rating' },
-  { name: 'популярности ASC', code: 1, sortProp: '-rating' },
-  { name: 'цене DESC', code: 2, sortProp: 'price' },
-  { name: 'цене ASC', code: 3, sortProp: '-price' },
-  { name: 'алфавиту DESC', code: 4, sortProp: 'title' },
-  { name: 'алфавиту ASC', code: 5, sortProp: '-title' },
+const listArr = [
+  { name: 'популярности 🡓', code: 0, sortProp: 'rating' },
+  { name: 'популярности 🡑', code: 1, sortProp: '-rating' },
+  { name: 'цене 🡓', code: 2, sortProp: 'price' },
+  { name: 'цене 🡑', code: 3, sortProp: '-price' },
+  { name: 'алфавиту 🡓', code: 4, sortProp: 'title' },
+  { name: 'алфавиту 🡑', code: 5, sortProp: '-title' },
 ];
 
 const Sort = React.memo(({ value }) => {
@@ -27,7 +27,7 @@ const Sort = React.memo(({ value }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!event.composedPath().includes(sortRef.current)) {
+      if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setOpen(false);
       }
     };
