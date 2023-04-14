@@ -1,5 +1,4 @@
 import React, { useEffect, useCallback } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Categories, Sort, BalloonBlock, Skeleton, Pagination, BackToTop } from '../components';
