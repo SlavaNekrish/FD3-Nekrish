@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import axios from 'axios';
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { addItem, selectCartItemById } from '../redux/slices/cartSlicee';
-import { selectItemData } from '../redux/slices/itemSlice';
+import { selectItemData, getItemsForSlider } from '../redux/slices/itemSlice';
 import { Slider } from '../components/Slider';
+import { useResize } from '../components/useResize/useResize';
 
 const FullItem = () => {
   const dispatch = useDispatch();
   const [item, setItem] = useState();
   const { items } = useSelector(selectItemData);
-  console.log(items);
+  const { id } = useParams();
+  const { isScreenMomile, isScreenSm, isScreenMd, isScreenLg, isScreenXl } = useResize();
 
   const navigate = useNavigate();
 
@@ -30,9 +32,8 @@ const FullItem = () => {
       }
     }
     fetchItem();
-  }, []);
-
-  const { id } = useParams();
+    dispatch(getItemsForSlider());
+  }, [id]);
 
   const cartItem = useSelector(selectCartItemById(id));
 
@@ -67,8 +68,11 @@ const FullItem = () => {
           <p>{item.description}</p>
         </div>
       </div>
-      <h4>Возможно, вас заинтересуют другие наши товары:</h4>
-      <Slider slides={items} />
+      <h2 className="fullitem__titleSlider">Возможно, вас заинтересуют другие наши товары:</h2>
+      {isScreenLg && <Slider slides={items} quant={5} />}
+      {isScreenMd && !isScreenLg && <Slider slides={items} quant={3} />}
+      {!isScreenMomile && !isScreenMd && <Slider slides={items} quant={2} />}
+      {isScreenMomile && <Slider slides={items} quant={1} />}
     </div>
   );
 };
