@@ -34,19 +34,19 @@ const itemSlice = createSlice({
       state.items = action.payload;
     },
   },
-  extraReducers: {
-    [fetchItems.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchItems.pending, (state) => {
       state.status = 'loading';
       state.items = [];
-    },
-    [fetchItems.fulfilled]: (state, action) => {
+    });
+    builder.addCase(fetchItems.fulfilled, (state, action) => {
       state.items = action.payload;
       state.status = 'success';
-    },
-    [fetchItems.rejected]: (state) => {
+    });
+    builder.addCase(fetchItems.rejected, (state) => {
       state.status = 'error';
       state.items = [];
-    },
+    });
   },
 });
 

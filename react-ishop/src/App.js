@@ -11,9 +11,6 @@ const Cart = React.lazy(() => import(/* webpackChunkName: "Cart" */ './pages/Car
 const FullItem = React.lazy(() => import(/* webpackChunkName: "FullItem" */ './pages/FullItem'));
 
 function App() {
-  // const count = useSelector((state) => state.counter.count);
-  // const dispatch = useDispatch();
-
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

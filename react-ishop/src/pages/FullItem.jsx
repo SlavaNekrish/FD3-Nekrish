@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addItem, selectCartItemById } from '../redux/slices/cartSlicee';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import { addItem, selectCartItemById } from '../redux/slices/cartSlicee';
+import { selectItemData } from '../redux/slices/itemSlice';
+import { Slider } from '../components/Slider';
 
 const FullItem = () => {
   const dispatch = useDispatch();
   const [item, setItem] = useState();
+  const { items } = useSelector(selectItemData);
+  console.log(items);
 
   const navigate = useNavigate();
 
@@ -63,6 +67,8 @@ const FullItem = () => {
           <p>{item.description}</p>
         </div>
       </div>
+      <h4>Возможно, вас заинтересуют другие наши товары:</h4>
+      <Slider slides={items} />
     </div>
   );
 };
